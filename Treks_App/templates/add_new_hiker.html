@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>add new hikers</title>
+    <h1 style="color: blue">add new hikers</h1>
+
+<form method="POST">
+    {% csrf_token %}
+    hid: <textarea name="hid" rows="1" cols="100"></textarea><br>
+    hname: <textarea name="hname" rows="1" cols="100"></textarea><br>
+    country: <textarea name="country" rows="1" cols="100"></textarea><br>
+    smoker:
+    <label>
+    <input type="radio" name="smoker" value="yes"> yes
+</label>
+<label>
+    <input type="radio" name="smoker" value="no"> no
+</label>
+    <br>
+    fitness:
+    <select name="fitness">
+    <option value="1">1</option>
+    <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+        <option value="9">9</option>
+        <option value="10">10</option>
+    </select>
+    <br>
+    <input type="submit">
+</form>
+{% if success %}
+        <p class="success-message">Salam alekum! You added a new hiker!</p>
+    {% endif %}
+    {% if not success and request.method == 'POST' %}
+        {% if hid_failed %}
+            <p class="failure-message">You failed! , hid already in the system</p>
+        {% elif same_country%}
+        <p class="failure-message">You failed!, nobody lives in this country</p>
+        {% else %}
+        <p class="failure-message">You failed!, this is not a hiker this is a fatty</p>
+        {% endif %}
+    {% endif %}
+<div class="links">
+            <a href="{% url 'index' %}">Home</a>
+            <br><br>
+            <a href="{% url 'query_results' %}">Query Results</a>
+            <br><br>
+    <a href="{% url 'add_new_hiker' %}">Add a new hiker</a>
+    <br><br>
+    <a href="{% url 'Records_Management' %}">Records Management</a>
+        </div>
+</html>

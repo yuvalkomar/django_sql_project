@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Query results</title>
+</head>
+<body>
+    <h1 style="color: blue">Welcome to the treks Website</h1>
+    <p>Here are the query results:</p>
+    <div class="container">
+        <div class="links">
+            <a href="{% url 'index' %}">Home</a>
+            <br><br>
+            <a href="{% url 'query_results' %}">Query Results</a>
+            <br><br>
+    <a href="{% url 'add_new_hiker' %}">Add a new hiker</a>
+            <br><br>
+    <a href="{% url 'Records_Management' %}">Records Management</a>
+        </div>
+    </div>
+<h2>Query 1 Results</h2>
+<table style="margin-left: 400px; border-collapse: collapse;">
+    <tr style="border: 1px solid black;">
+        <th style="border: 1px solid black;">Trek</th>
+        <th style="border: 1px solid black;">Loyal Hikers Number</th>
+    </tr>
+    {% for product in sql_res_1 %}
+    <tr style="border: 1px solid black;">
+        <td style="border: 1px solid black;">{{ product.tname }}</td>
+        <td style="border: 1px solid black;">{{ product.LoyalHikersNumber }}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+<!-- Query 2 results -->
+<h2>Query 2 Results</h2>
+<table style="margin-left: 400px; border-collapse: collapse;">
+    <tr style="border: 1px solid black;">
+        <th style="border: 1px solid black;">Country</th>
+        <th style="border: 1px solid black;">First Trip</th>
+    </tr>
+    {% for product in sql_res_2 %}
+    <tr style="border: 1px solid black;">
+        <td style="border: 1px solid black;">{{ product.country }}</td>
+        <td style="border: 1px solid black;">{{ product.FirstTrip }}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+<!-- Query 3 results -->
+<h2>Query 3 Results</h2>
+<table style="margin-left: 400px; border-collapse: collapse;">
+    <tr style="border: 1px solid black;">
+        <th style="border: 1px solid black;">Country</th>
+        <th style="border: 1px solid black;">Dangerous Trips Num (Kosovo)</th>
+    </tr>
+    {% for product in sql_res_3 %}
+    <tr style="border: 1px solid black;">
+        <td style="border: 1px solid black;">{{ product.country }}</td>
+        <td style="border: 1px solid black;">{{ product.Count }}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+</body>
+</html>

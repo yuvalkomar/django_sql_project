@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Registration</title>
+    <h1 style="color: blue">Add Registration</h1>
+    <form method="POST">
+    {% csrf_token %}
+    hid: <textarea name="hid" rows="1" cols="100"></textarea><br>
+    tname: <textarea name="tname" rows="1" cols="100"></textarea><br>
+    <br>
+    <input type="submit">
+</form>
+    {% if success %}
+        <p class="success-message">Salam alekum! You added a new hiker in trek!</p>
+    {% endif %}
+    {% if not success and request.method == 'POST' %}
+        {% if hid_failed %}
+            <p class="failure-message">You failed! , hid is not in the system</p>
+        {% elif tname_failed%}
+        <p class="failure-message">You failed!, tname is not in the system</p>
+        {% elif hikerdidtrek%}
+        <p class="failure-message">You failed!, the hiker already did this trek</p>
+        {% else %}
+        <p class="failure-message">You failed!, fitness is lower than difficulty</p>
+        {% endif %}
+    {% endif %}
+
+    <h1 style="color: blue">Last 10 Trek Registrations</h1>
+    <table style="margin-left: 400px; border-collapse: collapse;">
+    <tr style="border: 1px solid black;">
+        <th style="border: 1px solid black;">hID</th>
+        <th style="border: 1px solid black;">Trek</th>
+        <th style="border: 1px solid black;">tDate</th>
+    </tr>
+    {% for product in recent_registrations %}
+    <tr style="border: 1px solid black;">
+        <td style="border: 1px solid black;">{{ product.hid }}</td>
+        <td style="border: 1px solid black;">{{ product.tname }}</td>
+        <td style="border: 1px solid black;">{{ product.tdate }}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+<div class="links">
+            <a href="{% url 'index' %}">Home</a>
+            <br><br>
+            <a href="{% url 'query_results' %}">Query Results</a>
+            <br><br>
+    <a href="{% url 'add_new_hiker' %}">Add a new hiker</a>
+    <br><br>
+    <a href="{% url 'Records_Management' %}">Records Management</a>
+        </div>
+
+</html>
